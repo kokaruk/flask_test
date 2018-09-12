@@ -1,3 +1,3 @@
-# just followin tutorial
+# just following a tutorial
 
-nothing to see here
+Nothing to see here
