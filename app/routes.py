@@ -1,9 +1,19 @@
-from app import app, db
+from datetime import datetime
+
 from flask import render_template, redirect, flash, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
-from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
+
+from app import app, db
+from app.forms import LoginForm, RegistrationForm
+from app.models import User
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 
 @app.route('/')
